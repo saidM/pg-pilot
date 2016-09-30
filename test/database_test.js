@@ -76,4 +76,24 @@ describe('Database Class', () => {
       ).to.be.fulfilled;
     });
   });
+
+  describe('export()', () => {
+    it('rejects the promise if the there is no connection to the database', () => {
+      let db = new Database('pokemon_test');
+      let promise = db.export();
+
+      return expect(promise).to.be.rejectedWith('There is no connection');
+    });
+
+    it('resolves the promise with the SQL dump if there is a connection', () => {
+      let db = new Database('pokemon_test');
+
+      return expect(
+        db.connect()
+        .then(() => {
+          return db.export();
+        })
+      ).to.be.fulfilled;
+    });
+  });
 });
