@@ -11,16 +11,30 @@ chai.use(chaiAsPromised);
 
 describe('Database Class', () => {
   describe('connect()', () => {
-    it('rejects the promise if the credentials are invalid', () => {
+    it('rejects the promise if the credentials are missing', () => {
+      let db = new Database('pokemon_test');
+      let promise = db.connect({ password: 'invalid password' }); // Missing user
+
+      return expect(promise).to.be.rejectedWith('Missing credentials');
+    });
+
+    it('rejects the promise if the database does not exist', () => {
       let db = new Database('invalid_db');
-      let promise = db.connect();
+      let promise = db.connect({ user: 'postgres', password: '' });
 
       return expect(promise).to.be.rejectedWith('database "invalid_db" does not exist');
     });
     
+    it('rejects the promise if the role does not exist', () => {
+      let db = new Database('pokemon_test');
+      let promise = db.connect({ user: 'invalid_user', password: '' });
+
+      return expect(promise).to.be.rejectedWith('role "invalid_user" does not exist');
+    });
+    
     it('resolves the promise if the credentials are ok', () => {
       let db = new Database('pokemon_test');
-      let promise = db.connect();
+      let promise = db.connect({ user: 'postgres', password: '' });
 
       return expect(promise).to.be.fulfilled;
     });
@@ -38,7 +52,7 @@ describe('Database Class', () => {
       let db = new Database('pokemon_test');
 
       return expect(
-        db.connect()
+        db.connect({ user: 'postgres', password: '' })
         .then(() => {
           return db.getTables();
         })
@@ -58,7 +72,7 @@ describe('Database Class', () => {
       let db = new Database('pokemon_test');
 
       return expect(
-        db.connect()
+        db.connect({ user: 'postgres', password: '' })
         .then(() => {
           return db.query('abc');
         })
@@ -69,7 +83,7 @@ describe('Database Class', () => {
       let db = new Database('pokemon_test');
 
       return expect(
-        db.connect()
+        db.connect({ user: 'postgres', password: '' })
         .then(() => {
           return db.query('select 1+1');
         })
@@ -89,7 +103,7 @@ describe('Database Class', () => {
       let db = new Database('pokemon_test');
 
       return expect(
-        db.connect()
+        db.connect({ user: 'postgres', password: '' })
         .then(() => {
           return db.export();
         })
@@ -109,7 +123,7 @@ describe('Database Class', () => {
       let db = new Database('pokemon_test');
 
       return expect(
-        db.connect()
+        db.connect({ user: 'postgres', password: '' })
         .then(() => {
           return db.import('abc');
         })
@@ -120,7 +134,7 @@ describe('Database Class', () => {
       let db = new Database('pokemon_test');
 
       return expect(
-        db.connect()
+        db.connect({ user: 'postgres', password: '' })
         .then(() => {
           return db.import('select 1+1');
         })
