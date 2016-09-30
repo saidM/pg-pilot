@@ -15,7 +15,7 @@ describe('Database Class', () => {
       let db = new Database('invalid_db');
       let promise = db.connect();
 
-      return expect(promise).to.be.rejectedWith('error: database "invalid_db" does not exist');
+      return expect(promise).to.be.rejectedWith('database "invalid_db" does not exist');
     });
     
     it('resolves the promise if the credentials are ok', () => {
@@ -46,7 +46,7 @@ describe('Database Class', () => {
     });
   });
 
-  describe('query', () => {
+  describe('query()', () => {
     it('rejects the promise if the there is no connection to the database', () => {
       let db = new Database('pokemon_test');
       let promise = db.query('select 1+1');
@@ -62,7 +62,7 @@ describe('Database Class', () => {
         .then(() => {
           return db.query('abc');
         })
-      ).to.be.rejectedWith('error: syntax error at or near "abc"');
+      ).to.be.rejectedWith('syntax error at or near "abc"');
     });
 
     it('resolves the promise if the query is ok', () => {
