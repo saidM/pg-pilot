@@ -96,4 +96,35 @@ describe('Database Class', () => {
       ).to.be.fulfilled;
     });
   });
+  
+  describe('import()', () => {
+    it('rejects the promise if the there is no connection to the database', () => {
+      let db = new Database('pokemon_test');
+      let promise = db.import('select 1+1');
+
+      return expect(promise).to.be.rejectedWith('There is no connection');
+    });
+    
+    it('rejects if the SQL is invalid', () => {
+      let db = new Database('pokemon_test');
+
+      return expect(
+        db.connect()
+        .then(() => {
+          return db.import('abc');
+        })
+      ).to.be.rejected;
+    });
+
+    it('resolves the promise if the SQL file was successfully imported in the database', () => {
+      let db = new Database('pokemon_test');
+
+      return expect(
+        db.connect()
+        .then(() => {
+          return db.import('select 1+1');
+        })
+      ).to.be.fulfilled;
+    });
+  });
 });
