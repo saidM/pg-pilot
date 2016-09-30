@@ -56,7 +56,7 @@ describe('Database Class', () => {
         .then(() => {
           return db.getTables();
         })
-      ).to.be.fulfilled;
+      ).to.eventually.have.property('tables');
     });
   });
 

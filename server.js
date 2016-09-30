@@ -13,8 +13,12 @@ app.post('/login', (req, res, next) => {
   let credentials = { user: req.body.user, password: req.body.password };
   let database = new Database(req.body.database);
 
+  // Try to make a connection to the database
   database.connect(credentials).then(() => {
-    res.send('OK'); 
+    // Now get all the tables
+    return database.getTables();
+  }).then((data) => {
+    res.json(data);
   }).catch((err) => {
     next({ status: 401, message: err });
   });
