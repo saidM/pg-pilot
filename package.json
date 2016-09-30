@@ -1,0 +1,29 @@
+{
+  "name": "pg-pilot",
+  "version": "0.1.0",
+  "description": "Manage your PostgreSQL databases in the browser",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saidM/pg-pilot.git"
+  },
+  "keywords": [
+    "postgresql",
+    "postgres",
+    "database",
+    "db",
+    "sql"
+  ],
+  "author": "Saïd Mimouni <sayid.mimouni@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saidM/pg-pilot/issues"
+  },
+  "homepage": "https://github.com/saidM/pg-pilot#readme"
+}
