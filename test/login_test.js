@@ -1,11 +1,6 @@
 'use strict';
 
-process.env.NODE_ENV = 'test';
-
-let chai = require('chai'),
-    expect = chai.expect,
-    request = require('supertest'),
-    app = require('../server');
+require('./test_helper');
 
 describe('POST /login', () => {
   it('returns 400 if the database or the user is missing', () => {

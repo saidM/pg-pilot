@@ -1,13 +1,6 @@
 'use strict';
 
-process.env.NODE_ENV = 'test';
-
-let chai = require('chai'),
-    expect = chai.expect,
-    chaiAsPromised = require('chai-as-promised'),
-    Database = require('../lib/database');
-
-chai.use(chaiAsPromised);
+require('./test_helper');
 
 describe('Database Class', () => {
   describe('connect()', () => {

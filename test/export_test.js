@@ -1,11 +1,6 @@
 'use strict';
 
-process.env.NODE_ENV = 'test';
-
-let chai = require('chai'),
-    expect = chai.expect,
-    request = require('supertest'),
-    app = require('../server');
+require('./test_helper');
 
 describe('GET /export', () => {
   it('returns 401 if there is no active connection to the database', (done) => {
