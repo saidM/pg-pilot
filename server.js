@@ -34,6 +34,14 @@ app.post('/query', isConnected, (req, res, next) => {
   });
 });
 
+app.get('/export', isConnected, (req, res, next) => {
+  app.get('pg').export().then((dump) => {
+    res.send(dump);
+  }).catch((err) => {
+    next({ status: 500, message: err });
+  });
+});
+
 
 function isConnected(req, res, next) {
   if (!app.get('pg')) next({ status: 401, message: 'You must be connected to the database' });
