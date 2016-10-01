@@ -42,6 +42,16 @@ app.get('/export', isConnected, (req, res, next) => {
   });
 });
 
+app.post('/import', isConnected, (req, res, next) => {
+  if (typeof req.body.sql === 'undefined') next({ status: 400, message: 'Missing SQL dump' });
+
+  app.get('pg').import(req.body.sql).then(() => {
+    res.send('Import OK');
+  }).catch((err) => {
+    next({ status: 500, message: err });
+  });
+});
+
 
 function isConnected(req, res, next) {
   if (!app.get('pg')) next({ status: 401, message: 'You must be connected to the database' });
