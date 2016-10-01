@@ -52,6 +52,26 @@ describe('Database Class', () => {
       ).to.eventually.have.property('tables');
     });
   });
+  
+  describe('getTable()', () => {
+    it('rejects the promise if the there is no connection to the database', () => {
+      let db = new Database('pokemon_test');
+      let promise = db.getTable('trainers');
+
+      return expect(promise).to.be.rejectedWith('There is no connection');
+    });
+
+    it('resolves the promise with the table columns', () => {
+      let db = new Database('pokemon_test');
+
+      return expect(
+        db.connect({ user: 'postgres', password: '' })
+        .then(() => {
+          return db.getTable('trainers');
+        })
+      ).to.be.fulfilled;
+    });
+  });
 
   describe('query()', () => {
     it('rejects the promise if the there is no connection to the database', () => {
