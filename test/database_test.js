@@ -60,8 +60,19 @@ describe('Database Class', () => {
 
       return expect(promise).to.be.rejectedWith('There is no connection');
     });
+    
+    it('rejects the promise if the table does not exist', () => {
+      let db = new Database('pokemon_test');
 
-    it('resolves the promise with the table columns', () => {
+      return expect(
+        db.connect({ user: 'postgres', password: '' })
+        .then(() => {
+          return db.getTable('invalid_table');
+        })
+      ).to.be.rejectedWith('relation "invalid_table" does not exist');
+    });
+
+    it("resolves the promise with the table's fields and rows", () => {
       let db = new Database('pokemon_test');
 
       return expect(
@@ -69,7 +80,7 @@ describe('Database Class', () => {
         .then(() => {
           return db.getTable('trainers');
         })
-      ).to.be.fulfilled;
+      ).to.eventually.have.property('fields');
     });
   });
 
