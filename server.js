@@ -5,7 +5,9 @@ let express = require('express'),
     bodyParser = require('body-parser'),
     Database = require('./lib/database');
 
+app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
+app.use(express.static('public'));
 
 app.post('/login', (req, res, next) => {
   if (typeof req.body.user === 'undefined' || typeof req.body.database === 'undefined') next({ status: 400, message: 'Missing credentials' });
@@ -23,6 +25,14 @@ app.post('/login', (req, res, next) => {
   }).catch((err) => {
     app.set('pg', null); // Empty the PG client
     next({ status: 401, message: err });
+  });
+});
+
+app.get('/tables/:name', (req, res, next) => {
+  app.get('pg').getTable(req.params.name).then((data) => {
+    res.send(data);
+  }).catch((err) => {
+    next({ status: 500, message: err });
   });
 });
 
