@@ -1,9 +1,9 @@
 'use strict';
 
-let express = require('express'),
-    app     = express(),
-    bodyParser = require('body-parser'),
-    Database = require('./lib/database');
+let express     = require('express'),
+    app         = express(),
+    bodyParser  = require('body-parser'),
+    Database    = require('./lib/database');
 
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
@@ -15,13 +15,13 @@ app.post('/login', (req, res, next) => {
   let credentials = { user: req.body.user, password: req.body.password };
   let database = new Database(req.body.database);
 
+  let connect = database.connect(credentials),
+  getTables   = database.getTables();
+
   // Try to make a connection to the database
-  database.connect(credentials).then(() => {
-    // Now get all the tables
-    return database.getTables();
-  }).then((data) => {
+  Promise.all([connect, getTables]).then((values) => {
     app.set('pg', database); // Save the Database instance (so we can re-use it in all the routes)
-    res.json(data);
+    res.json(values[1]); // Render the tables
   }).catch((err) => {
     app.set('pg', null); // Empty the PG client
     next({ status: 401, message: err });
