@@ -75,12 +75,15 @@ describe('Database Class', () => {
     it("resolves the promise with the table's fields and rows", () => {
       let db = new Database('pokemon_test');
 
-      return expect(
-        db.connect({ user: 'postgres', password: '' })
-        .then(() => {
-          return db.getTable('trainers');
-        })
-      ).to.eventually.have.property('fields');
+      let connect = db.connect({ user: 'postgres', password: '' });
+      let getTable = db.getTable('trainers');
+
+      return Promise.all([connect, getTable]).then(function(values) {
+        let data = values[1]; // Get the data from the getTable() method
+
+        expect(data).to.have.property('rows');
+        expect(data).to.have.property('fields');
+      });
     });
   });
 
