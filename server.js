@@ -1,9 +1,9 @@
 'use strict';
 
 const express   = require('express'),
-    app         = express(),
-    bodyParser  = require('body-parser'),
-    Database    = require('./lib/database');
+      app         = express(),
+      bodyParser  = require('body-parser'),
+      Database    = require('./lib/database');
 
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
@@ -12,11 +12,11 @@ app.use(express.static('public'));
 app.post('/login', (req, res, next) => {
   if (typeof req.body.user === 'undefined' || typeof req.body.database === 'undefined') next({ status: 400, message: 'Missing credentials' })
 
-  const credentials = req.body
-  const database = new Database(req.body.database)
+  const credentials = req.body,
+        database    = new Database(req.body.database)
 
-  const connect = database.connect(credentials),
-  getTables   = database.getTables()
+  const connect   = database.connect(credentials),
+        getTables = database.getTables()
 
   // Try to make a connection to the database
   Promise.all([connect, getTables]).then((values) => {
@@ -34,7 +34,7 @@ app.post('/login', (req, res, next) => {
   })
 })
 
-app.get('/tables/:name', (req, res, next) => {
+app.get('/tables/:name', isConnected, (req, res, next) => {
   app.get('pg').getTable(req.params.name).then((data) => {
     res.send(data)
   }).catch((err) => {
