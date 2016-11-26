@@ -10,7 +10,9 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.post('/login', (req, res, next) => {
-  if (typeof req.body.user === 'undefined' || typeof req.body.database === 'undefined') next({ status: 400, message: 'Missing credentials' })
+  if (typeof req.body.user === 'undefined' || typeof req.body.database === 'undefined') {
+    next({ status: 400, message: 'Missing credentials' })
+  }
 
   const credentials = req.body,
         database    = new Database(req.body.database)
@@ -67,7 +69,6 @@ app.post('/import', isConnected, (req, res, next) => {
     next({ status: 500, message: err })
   })
 })
-
 
 function isConnected(req, res, next) {
   if (!app.get('pg')) next({ status: 401, message: 'You must be connected to the database' })
