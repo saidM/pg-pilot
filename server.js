@@ -38,6 +38,14 @@ app.post('/login', (req, res, next) => {
   })
 })
 
+app.get('/tables', isConnected, (req, res, next) => {
+  app.get('pg').getTables().then((data) => {
+    res.send(data)
+  }).catch((err) => {
+    next({ status: 500, message: err })
+  })
+})
+
 app.get('/tables/:name', isConnected, (req, res, next) => {
   app.get('pg').getTable(req.params.name).then((data) => {
     res.send(data)
