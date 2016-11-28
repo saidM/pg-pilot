@@ -10,20 +10,23 @@ class App extends Component {
   }
 
   componentWillMount() {
-    axios.post('http://127.0.1:8080/login', { user: 'said', database: 'profacture_dev' })
-      .then(data => this.setState({ tables: data.items }))
+    axios.get('http://127.0.1:8080/tables')
+      .then(response => this.setState({ tables: response.data.tables }))
       .catch(err => console.error(err))
   }
 
   render() {
-    const tables = this.state.tables.map(table => table.username)
+    const tables = this.state.tables.map(table => {
+      return (
+        <li key={table}>{table}</li>
+      )
+    })
 
     return (
       <div>
         <h1>PG-Pilot</h1>
-        <hr />
         <h2>Tables</h2>
-        {tables}
+        <ul>{tables}</ul>
         <hr />
         {this.props.children}
       </div>
