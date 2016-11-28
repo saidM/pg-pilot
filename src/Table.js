@@ -7,6 +7,12 @@ class Table extends Component {
     this.state = { fields: [], rows: [] }
   }
 
+  componentDidMount() {
+    axios.get(`http://127.0.1:8080/tables/${this.props.params.tableName}`)
+      .then(response => this.setState({ fields: response.data.fields, rows: response.data.rows }))
+      .catch(err => console.error(err))
+  }
+
   componentWillMount() {
     axios.get(`http://127.0.1:8080/tables/${this.props.params.tableName}`)
       .then(response => this.setState({ fields: response.data.fields, rows: response.data.rows }))
@@ -34,8 +40,8 @@ class Table extends Component {
     })
 
     return (
-      <div>
-        <h2>{this.props.params.tableName}</h2>
+      <section>
+        <h1>{this.props.params.tableName} ({this.state.rows.length})</h1>
         <table>
           <thead>
             <tr>{fields}</tr>
@@ -44,7 +50,7 @@ class Table extends Component {
             {rows}
           </tbody>
         </table>
-      </div>
+      </section>
     )
   }
 }

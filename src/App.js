@@ -16,18 +16,9 @@ class App extends Component {
   }
 
   render() {
-    const tables = this.state.tables.map(table => {
-      return (
-        <li key={table}>{table}</li>
-      )
-    })
-
     return (
-      <div>
-        <h1>PG-Pilot</h1>
-        <h2>Tables</h2>
-        <ul>{tables}</ul>
-        <hr />
+      <div id="container">
+        <Tables tables={this.state.tables} />
         {this.props.children}
       </div>
     )

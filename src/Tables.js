@@ -1,15 +1,19 @@
 import React, { Component } from 'react'
-import Table from './Table'
+import { Link } from 'react-router'
 
 class Tables extends Component {
   render() {
-    const tables = this.props.tables.map(table => <Table key={table.id} table={table} />)
+    const tables = this.props.tables.map(table => {
+      return (
+        <li key={table}><a href={table}>{table}</a></li>
+      )
+    })
 
     return (
-      <div>
-        <h2>Tables</h2>
+      <aside>
+        <h3>Tables</h3>
         <ul>{tables}</ul>
-      </div>
+      </aside>
     )
   }
 }
