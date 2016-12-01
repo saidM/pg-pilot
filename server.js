@@ -14,10 +14,8 @@ app.post('/login', (req, res, next) => {
     next({ status: 400, message: 'Missing credentials' })
   }
 
-  // const credentials = req.body,
-  const credentials = { user: 'said', database: 'profacture_dev' }
-  // database    = new Database(req.body.database)
-        database    = 'profacture_dev'
+  const credentials = req.body,
+  database          = new Database(req.body.database)
 
   const connect   = database.connect(credentials),
         getTables = database.getTables()

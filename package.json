@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha test/; react-scripts test --env=jsdom",
+    "test": "mocha test",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
