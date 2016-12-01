@@ -4,8 +4,10 @@ import { Link } from 'react-router'
 class Tables extends Component {
   render() {
     const tables = this.props.tables.map(table => {
+      const tableLink = `/tables/${table}`
+
       return (
-        <li key={table}><a href={table}>{table}</a></li>
+        <li key={table}><a href={tableLink}>{table}</a></li>
       )
     })
 

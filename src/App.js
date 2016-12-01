@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { browserHistory } from 'react-router'
 import axios from 'axios'
 
 import Header from './Header'
@@ -13,8 +14,7 @@ class App extends Component {
   componentWillMount() {
     axios.get('http://127.0.1:8080/tables')
       .then(response => this.setState({ tables: response.data.tables }))
-      .catch(err => window.location.href = '/connect')
-      // console.error(err))
+      .catch(err => browserHistory.push('/connect'))
   }
 
   render() {
@@ -22,7 +22,6 @@ class App extends Component {
     let header, tables;
     if (this.props.location.pathname != '/connect') header = <Header />
     if (this.props.location.pathname != '/connect') tables = <Tables tables={this.state.tables} />
-
 
     return (
       <div id="container">
