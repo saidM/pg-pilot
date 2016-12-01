@@ -5,10 +5,12 @@ import { Router, Route, browserHistory } from 'react-router'
 import App from './App'
 import Table from './Table'
 import NoMatch from './NoMatch'
+import Connect from './Connect'
 
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={App}>
+    <Route path="/connect" component={Connect} />
       <Route path="/tables/:tableName" component={Table} />
     </Route>
     <Route path="*" component={NoMatch} />

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
+import Header from './Header'
 import Tables from './Tables'
 
 class App extends Component {
@@ -12,13 +13,21 @@ class App extends Component {
   componentWillMount() {
     axios.get('http://127.0.1:8080/tables')
       .then(response => this.setState({ tables: response.data.tables }))
-      .catch(err => console.error(err))
+      .catch(err => window.location.href = '/connect')
+      // console.error(err))
   }
 
   render() {
+    // Don't render the header & the "Tables" if we are on the "Connect" page
+    let header, tables;
+    if (this.props.location.pathname != '/connect') header = <Header />
+    if (this.props.location.pathname != '/connect') tables = <Tables tables={this.state.tables} />
+
+
     return (
       <div id="container">
-        <Tables tables={this.state.tables} />
+        {header}
+        {tables}
         {this.props.children}
       </div>
     )
