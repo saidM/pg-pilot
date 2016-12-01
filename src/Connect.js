@@ -10,18 +10,30 @@ class Connect extends Component {
 
     axios.post('http://127.0.1:8080/login', credentials)
       .then(response => browserHistory.push('/'))
-      .catch(err => console.error(err))
+      .catch(err => alert('Invalid credentials'))
   }
 
   render() {
     return (
-      <div>
-        <h1>Connect</h1>
+      <div id="connect">
+        <h1>PG-Pilot</h1>
+        <h2>Use the form below to connect to one or your PostgreSQL databases.</h2>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <input type="text" ref="database" />
-          <input type="text" ref="user" />
-          <input type="password" ref="password" />
-          <input type="submit" value="connect" />
+          <p>
+            <label for="database">Database</label>
+            <input type="text" ref="database" id="database" />
+          </p>
+          <p>
+            <label for="user">User</label>
+            <input type="text" ref="user" id="user" />
+          </p>
+          <p>
+            <label for="password">Password</label>
+            <input type="password" ref="password" id="password" />
+          </p>
+          <p>
+            <input type="submit" value="connect" />
+          </p>
         </form>
       </div>
     )
