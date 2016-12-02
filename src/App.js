@@ -11,7 +11,7 @@ class App extends Component {
     this.state = { tables: [] }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     axios.get('http://127.0.1:8080/tables')
       .then(response => this.setState({ tables: response.data.tables }))
       .catch(err => browserHistory.push('/connect'))
