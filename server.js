@@ -60,6 +60,7 @@ app.post('/query', isConnected, (req, res, next) => {
 
 app.get('/export', isConnected, (req, res, next) => {
   app.get('pg').export().then((dump) => {
+    res.contentType('application/octet-stream')
     res.send(dump)
   }).catch((err) => {
     next({ status: 500, message: err })
