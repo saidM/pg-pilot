@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 import axios from 'axios'
 
 class Table extends Component {
@@ -20,7 +21,7 @@ class Table extends Component {
   }
 
   render() {
-    const fields = this.state.fields.map(field => {
+    let fields = this.state.fields.slice(0, 5).map(field => {
       return (
         <th key={field.column_name}>{field.column_name}</th>
       )
@@ -28,28 +29,43 @@ class Table extends Component {
 
     const rows = this.state.rows.map((row, index) => {
       // For each row, loop through all the fields to get the value
-      const values = this.state.fields.map(field => {
+      const values = this.state.fields.slice(0, 5).map(field => {
         return (
           <td>{row[field.column_name]}</td>
         )
       })
 
       return (
-        <tr key={index}>{values}</tr>
+        <tr key={index}>
+          {values}
+          <td><a href="#">Details</a></td>
+        </tr>
       )
     })
 
     return (
       <section>
-        <h1>{this.props.params.tableName} ({this.state.rows.length})</h1>
-        <table>
-          <thead>
-            <tr>{fields}</tr>
-          </thead>
-          <tbody>
-            {rows}
-          </tbody>
-        </table>
+        <h1>{this.props.params.tableName} Table</h1>
+
+        <ul id="navigation">
+          <li><Link to={"/tables/" + this.props.params.tableName + "/structure"}>Structure View</Link></li>
+          <li className="active"><Link to={"/tables/" + this.props.params.tableName + "/rows"}>Data View</Link></li>
+        </ul>
+
+        <div>
+          <h2>Rows ({this.state.rows.length})</h2>
+          <table>
+            <thead>
+              <tr>
+                {fields}
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows}
+            </tbody>
+          </table>
+        </div>
       </section>
     )
   }

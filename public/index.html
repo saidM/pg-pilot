@@ -19,27 +19,39 @@
     div#connect form input { background: #fff; padding: 3.5% 4%; font-size: 13px; border-radius: 4px; width: 100%; border: 0; outline: 0;}
     div#connect form input[type="submit"] { width: 40%; background: #2ABB9B; border-radius: 3px; text-transform: capitalize; font-weight: 600; cursor: pointer; border-radius: 4px; color: #fff; font-size: 14px; border: 0 }
 
-    header { border-bottom: 1px solid #67809F; color: #67809F; letter-spacing: 0.25px }
+    header { background: #22313F; border-bottom: 1px solid #67809F; color: #E4F1FE; letter-spacing: 0.25px }
     header ul { margin: 0; padding: 0 }
-    header ul li { margin-right: 5%; padding: 1% 0; display: inline-block }
-    header ul li:first-child { width: 10%; margin-right: 2.5%; background: #67809F; color: #fff; text-align: center; font-weight: 600; text-transform: uppercase; }
+    header ul li { margin-right: 5%; padding: 1.25% 0; display: inline-block }
+    header ul li:first-child { width: 10%; margin-right: 2.5%; background: #1BA39C; color: #fff; text-align: center; font-weight: 600; text-transform: uppercase; }
     header ul li.right { margin-right: 2%; text-align: right; float: right; width: 20% }
     header ul li.right a { margin-left: 5%; }
     header ul li a { color: inherit; }
 
-    aside { float: left; width: 20%; height: 100vh; border-right: 1px solid #67809F }
-    aside h3 { margin: 10%; margin-bottom: 5%; font-size: 14px; font-weight: 600; color: #aaa }
-    aside ul { margin: 0 10%; padding: 0}
-    aside ul li { display: block; line-height: 2}
+    aside { float: left; width: 20%; height: 100vh; border-right: 1px dotted #e1e3e5}
+    aside div { margin: 5%; border: 1px solid #e1e3e5; border-bottom-width: 2px; }
+    aside h3 { background: #f7f8f9; padding: 7.5%; margin: 0; font-size: 13px; font-weight: 600; color: #888 }
+    aside ul { margin: 0; padding: 0; }
+    aside ul li { display: block; line-height: 2.4; padding: 2% 7.5%; border-bottom: 1px dotted #e1e3e5}
+    aside ul li:last-child { border-bottom: 0; }
     aside ul li a { color: #446CB3; }
 
     section { float: left; width: 79%; }
-    section h1 { margin: 2%; }
+    section h1 { margin: 0; padding: 2%; font-weight: 600; border-bottom: 1px dotted #e1e3e5 }
     section h1:first-letter { text-transform: capitalize }
-    section table { overflow-x: auto; width: 97%; display: block; margin: 2%; border-collapse: collapse }
-    section table thead th { width: 10%; text-align: left; padding: 1%; background: #e3e5e8; font-size: 13px; color: #333 }
-    section table tbody td { overflow: auto; padding: 1%; font-size: 13px; border: 1px solid #e3e5e8; color: #333 }
-    /*section table tbody tr:nth-child(even) { background: #e3e5e8; }*/
+    section ul#navigation { overflow: hidden; padding: 0; border: 1px solid #e1e3e5; width: 30%; margin: 2% }
+    section ul#navigation li { display: inline-block; width: 50%; text-align: center; padding: 3% 0}
+    section ul#navigation li:first-child { width: 49.7%; border-right: 1px solid #f1f3f5; }
+    section ul#navigation li:hover:not(.active) a { text-decoration: underline }
+    section ul#navigation li.active { background: #f7f8f9; }
+    section ul#navigation li.active a { cursor: default; font-weight: 600; }
+    section ul#navigation li a { text-decoration: none; color: inherit; }
+    section div { border: 1px solid #e1e3e5; margin: 2%; }
+    section div h2 { background: #f7f8f9; font-weight: 400; margin: 0; padding: 2%; }
+    section table { overflow-x: auto; background: #fff; margin: 0; width: 100%; border-collapse: collapse }
+    section table thead th { width: 18%; text-align: center; padding: 1%; background: #fff; font-size: 11px; color: #333 }
+    section table thead th:last-child { width: 10%; }
+    section table tbody td { overflow: auto; padding: 1%; text-align: center; font-size: 12px; border: 1px dotted #e1e3e5; color: #333 }
+    section table tbody tr:nth-child(odd) { background: #f7f8f9; }
   </style>
 </head>
 <body>

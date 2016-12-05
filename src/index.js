@@ -11,7 +11,8 @@ ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={App}>
     <Route path="/connect" component={Connect} />
-      <Route path="/tables/:tableName" component={Table} />
+      <Route path="/tables/:tableName/structure" component={Table} />
+      <Route path="/tables/:tableName/rows" component={Table} />
     </Route>
     <Route path="*" component={NoMatch} />
   </Router>,
