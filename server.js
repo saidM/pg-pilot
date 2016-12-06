@@ -66,7 +66,7 @@ app.get('/tables/:name', isConnected, (req, res, next) => {
 
 app.post('/query', isConnected, (req, res, next) => {
   app.get('pg').query(req.body.sql).then((data) => {
-    res.attachment(data)
+    res.send(data)
   }).catch((err) => {
     next({ status: 500, message: err })
   })
