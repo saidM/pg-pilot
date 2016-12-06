@@ -10,11 +10,23 @@ class Tables extends Component {
       )
     })
 
+    const views = this.props.views.map(view => {
+      const viewLink = `/views/${view}`
+
+      return (
+        <li key={view}><a href={viewLink}>{view}</a></li>
+      )
+    })
+
     return (
       <aside>
         <div>
           <h3>Tables</h3>
           <ul>{tables}</ul>
+        </div>
+        <div>
+          <h3>Views</h3>
+          <ul>{views}</ul>
         </div>
       </aside>
     )

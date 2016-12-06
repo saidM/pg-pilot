@@ -8,12 +8,12 @@ import Tables from './Tables'
 class App extends Component {
   constructor() {
     super()
-    this.state = { tables: [] }
+    this.state = { tables: [], views: [] }
   }
 
   componentDidMount() {
     axios.get('http://127.0.1:8080/tables')
-      .then(response => this.setState({ tables: response.data.tables }))
+      .then(response => this.setState({ tables: response.data.tables, views: response.data.views }))
       .catch(err => browserHistory.push('/connect'))
   }
 
@@ -21,7 +21,7 @@ class App extends Component {
     // Don't render the header & the "Tables" if we are on the "Connect" page
     let header, tables;
     if (this.props.location.pathname != '/connect') header = <Header />
-    if (this.props.location.pathname != '/connect') tables = <Tables tables={this.state.tables} />
+    if (this.props.location.pathname != '/connect') tables = <Tables tables={this.state.tables} views={this.state.views} />
 
     return (
       <div id="container">
