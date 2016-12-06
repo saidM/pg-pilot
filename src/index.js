@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { Router, Route, browserHistory } from 'react-router'
 
 import App from './App'
-import Table from './Table'
+import TableRows from './TableRows'
 import TableStructure from './TableStructure'
 import NoMatch from './NoMatch'
 import Connect from './Connect'
@@ -15,7 +15,7 @@ ReactDOM.render(
     <Route path="/" component={App}>
     <Route path="/connect" component={Connect} />
       <Route path="/tables/:tableName/structure" component={TableStructure} />
-      <Route path="/tables/:tableName/rows" component={Table} />
+      <Route path="/tables/:tableName/rows" component={TableRows} />
       <Route path="/query" component={Query} />
       <Route path="/import" component={Import} />
     </Route>

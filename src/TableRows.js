@@ -2,19 +2,13 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import axios from 'axios'
 
-class Table extends Component {
+class TableRows extends Component {
   constructor() {
     super()
     this.state = { fields: [], rows: [] }
   }
 
   componentDidMount() {
-    axios.get(`http://127.0.1:8080/tables/${this.props.params.tableName}`)
-      .then(response => this.setState({ fields: response.data.fields, rows: response.data.rows }))
-      .catch(err => console.error(err))
-  }
-
-  componentWillMount() {
     axios.get(`http://127.0.1:8080/tables/${this.props.params.tableName}`)
       .then(response => this.setState({ fields: response.data.fields, rows: response.data.rows }))
       .catch(err => console.error(err))
@@ -71,4 +65,4 @@ class Table extends Component {
   }
 }
 
-export default Table
+export default TableRows
