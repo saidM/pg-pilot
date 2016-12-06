@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router'
 
 class Tables extends Component {
   render() {
@@ -7,7 +6,7 @@ class Tables extends Component {
       const tableLink = `/tables/${table}/structure`
 
       return (
-        <li key={table}><Link to={tableLink}>{table}</Link></li>
+        <li key={table}><a href={tableLink}>{table}</a></li>
       )
     })
 
