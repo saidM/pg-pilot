@@ -17,14 +17,14 @@ describe('Database Class', () => {
 
       return expect(promise).to.be.rejectedWith('database "invalid_db" does not exist');
     });
-    
+
     it('rejects the promise if the role does not exist', () => {
       let db = new Database('pokemon_test');
       let promise = db.connect({ user: 'invalid_user', password: '' });
 
       return expect(promise).to.be.rejectedWith('role "invalid_user" does not exist');
     });
-    
+
     it('resolves the promise if the credentials are ok', () => {
       let db = new Database('pokemon_test');
       let promise = db.connect({ user: 'postgres', password: '' });
@@ -52,7 +52,7 @@ describe('Database Class', () => {
       ).to.eventually.have.property('tables');
     });
   });
-  
+
   describe('getTable()', () => {
     it('rejects the promise if the there is no connection to the database', () => {
       let db = new Database('pokemon_test');
@@ -60,7 +60,7 @@ describe('Database Class', () => {
 
       return expect(promise).to.be.rejectedWith('There is no connection');
     });
-    
+
     it('rejects the promise if the table does not exist', () => {
       let db = new Database('pokemon_test');
 
@@ -137,7 +137,7 @@ describe('Database Class', () => {
       ).to.be.fulfilled;
     });
   });
-  
+
   describe('import()', () => {
     it('rejects the promise if the there is no connection to the database', () => {
       let db = new Database('pokemon_test');
@@ -145,7 +145,7 @@ describe('Database Class', () => {
 
       return expect(promise).to.be.rejectedWith('There is no connection');
     });
-    
+
     it('rejects if the SQL is invalid', () => {
       let db = new Database('pokemon_test');
 
