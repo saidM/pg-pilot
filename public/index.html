@@ -45,8 +45,10 @@
     section ul#navigation li.active { background: #f7f8f9; }
     section ul#navigation li.active a { cursor: default; font-weight: 600; }
     section ul#navigation li a { text-decoration: none; color: inherit; }
-    section div { border: 1px solid #e1e3e5; margin: 2%; }
-    section div h2 { background: #f7f8f9; font-weight: 400; margin: 0; padding: 2%; }
+    section div, section form { overflow: hidden; border: 1px solid #e1e3e5; margin: 2%; }
+    section div h2, section form h2 { background: #f7f8f9; font-weight: 400; font-size: 14px; margin: 0; padding: 2%; }
+    section form textarea { width: 96%; outline: 0; height: 20vh; padding: 2%; border: 0; border-bottom: 1px dotted #e1e3e5;margin-bottom:0; font-size: 13px}
+    section form input[type="submit"] { margin: 2%; padding: 1% 2%; font-size: 13px; font-weight: 400; cursor: pointer; background: #1BA39C; color: #fff; border: 0; }
     section table { overflow-x: auto; background: #fff; margin: 0; width: 100%; border-collapse: collapse }
     section table thead th { width: 18%; text-align: center; padding: 1%; background: #fff; font-size: 11px; color: #333 }
     section table thead th:last-child { width: 10%; }

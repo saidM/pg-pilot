@@ -6,6 +6,7 @@ import App from './App'
 import Table from './Table'
 import NoMatch from './NoMatch'
 import Connect from './Connect'
+import Query from './Query'
 
 ReactDOM.render(
   <Router history={browserHistory}>
@@ -13,6 +14,7 @@ ReactDOM.render(
     <Route path="/connect" component={Connect} />
       <Route path="/tables/:tableName/structure" component={Table} />
       <Route path="/tables/:tableName/rows" component={Table} />
+      <Route path="/query" component={Query} />
     </Route>
     <Route path="*" component={NoMatch} />
   </Router>,

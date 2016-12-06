@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { browserHistory } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 import axios from 'axios'
 
 class Header extends Component {
@@ -16,7 +16,7 @@ class Header extends Component {
       <header>
         <ul>
           <li>PG-Pilot</li>
-          <li><a href="">Perform SQL query</a></li>
+          <li><Link to="/query">Perform SQL query</Link></li>
           <li><a href="">Import File</a></li>
           <li><a href="http://localhost:8080/export">Export Database</a></li>
           <li className="right"><strong>profacture_dev</strong> <a href="" onClick={this.handleLogout}>Switch database</a></li>
