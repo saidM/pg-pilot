@@ -50,6 +50,12 @@ app.get('/tables/:name', isConnected, (req, res, next) => {
   })
 })
 
+app.get('/tables/:name/:id', isConnected, (req, res, next) => {
+  app.get('pg').getRow(req.params.name, req.params.id)
+    .then(data => res.send(data))
+    .catch(err => next({ status: 404, message: err }))
+})
+
 app.post('/query', isConnected, (req, res, next) => {
   app.get('pg').query(req.body.sql).then((data) => {
     res.send(data)
