@@ -5,29 +5,32 @@ import axios from 'axios'
 class TableStructure extends Component {
   constructor() {
     super()
-    this.state = { fields: [] }
+    this.state = { fields: [], indexes: [] }
   }
 
   componentDidMount() {
     axios.get(`http://127.0.1:8080/tables/${this.props.params.tableName}`)
-      .then(response => this.setState({ fields: response.data.fields }))
-      .catch(err => console.error(err))
-  }
-  
-  componentWillMount() {
-    axios.get(`http://127.0.1:8080/tables/${this.props.params.tableName}`)
-      .then(response => this.setState({ fields: response.data.fields }))
+      .then(response => this.setState({ fields: response.data.fields, indexes: response.data.indexes }))
       .catch(err => console.error(err))
   }
 
   render() {
-    let fields = this.state.fields.map(field => {
+    const fields = this.state.fields.map(field => {
       return (
         <tr key={field.column_name}>
           <td>{field.column_name}</td>
           <td>{field.column_default}</td>
           <td>{field.data_type}</td>
           <td>{field.is_nullable}</td>
+        </tr>
+      )
+    })
+
+    const indexes = this.state.indexes.map(index => {
+      return (
+        <tr key={index.indexname}>
+          <td>{index.indexname}</td>
+          <td>{index.indexdef}</td>
         </tr>
       )
     })
@@ -57,6 +60,22 @@ class TableStructure extends Component {
             </tbody>
           </table>
         </div>
+
+        <div>
+          <h2>Indexes ({this.state.indexes.length})</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Definition</th>
+              </tr>
+            </thead>
+            <tbody>
+              {indexes}
+            </tbody>
+          </table>
+        </div>
+
       </section>
     )
   }
