@@ -72,7 +72,7 @@ describe('Database Class', () => {
       ).to.be.rejectedWith('relation "invalid_table" does not exist');
     });
 
-    it("resolves the promise with the table's fields and rows", () => {
+    it("resolves the promise with the table's fields, indexes and rows", () => {
       let db = new Database('pokemon_test');
 
       let connect = db.connect({ user: 'postgres', password: '' });
@@ -82,6 +82,7 @@ describe('Database Class', () => {
         let data = values[1]; // Get the data from the getTable() method
 
         expect(data).to.have.property('rows');
+        expect(data).to.have.property('indexes');
         expect(data).to.have.property('fields');
       });
     });
