@@ -1,8 +1,21 @@
 import React, { Component } from 'react'
+import { browserHistory } from 'react-router'
+import axios from 'axios'
 
 class Tables extends Component {
+  constructor() {
+    super()
+    this.state = { tables: [], views: [] }
+  }
+
+  componentDidMount() {
+    axios.get('http://127.0.1:8080/tables')
+      .then(response => this.setState({ tables: response.data.tables, views: response.data.views }))
+      .catch(err => browserHistory.push('/connect'))
+  }
+
   render() {
-    const tables = this.props.tables.map(table => {
+    const tables = this.state.tables.map(table => {
       const tableLink = `/tables/${table}/structure`
 
       return (
@@ -10,7 +23,7 @@ class Tables extends Component {
       )
     })
 
-    const views = this.props.views.map(view => {
+    const views = this.state.views.map(view => {
       const viewLink = `/views/${view}`
 
       return (
