@@ -88,6 +88,40 @@ describe('Database Class', () => {
     });
   });
 
+  describe('getRow(table, id)', () => {
+    it('rejects the promise if the there is no connection to the database', () => {
+      let db = new Database('pokemon_test')
+      let promise = db.getRow('trainers', 1)
+
+      return expect(promise).to.be.rejectedWith('There is no connection');
+    });
+
+    it('rejects the promise if the table does not exist', () => {
+      let db = new Database('pokemon_test')
+
+      return expect(
+        db.connect({ user: 'postgres', password: '' })
+        .then(() => {
+          return db.getRow('invalid_table', 1)
+        })
+      ).to.be.rejectedWith('relation "invalid_table" does not exist');
+    });
+
+    it("resolves the promise with the table's fields, indexes and rows", () => {
+      let db = new Database('pokemon_test')
+
+      let connect = db.connect({ user: 'postgres', password: '' })
+      let getTable = db.getRow('trainers', 1)
+
+      return Promise.all([connect, getTable]).then(function(values) {
+        let data = values[1]; // Get the data from the getTable() method
+
+        expect(data).to.have.property('id', 1)
+        expect(data).to.have.property('name', 'Saïd')
+      });
+    });
+  });
+
   describe('query()', () => {
     it('rejects the promise if the there is no connection to the database', () => {
       let db = new Database('pokemon_test');
