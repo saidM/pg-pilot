@@ -11,7 +11,7 @@ class TableRow extends Component {
   componentDidMount() {
     axios.get(`http://127.0.1:8080/tables/${this.props.params.tableName}/${this.props.params.id}`)
       .then(response => this.setState({ row: response.data }))
-      .catch(err => console.error(err))
+      .catch(err => alert('Row not found! Missing ID?'))
   }
 
   render() {
@@ -40,7 +40,7 @@ class TableRow extends Component {
           <li className="active"><Link to={"/tables/" + this.props.params.tableName + "/rows"}>Data View</Link></li>
         </ul>
 
-        <Link to={`/tables/${this.props.params.tableName}/rows`} href="#" id="go-back"><i className="fa fa-undo"></i> Back to the data view</Link>
+        <Link to={`/tables/${this.props.params.tableName}/rows`} href="#" id="go-back">Back to the data view</Link>
 
         <div>
           <h2>Row #{this.props.params.id}</h2>

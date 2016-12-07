@@ -32,7 +32,6 @@ class View extends Component {
       return (
         <tr key={index}>
           {values}
-          <td><Link to={`/views/${this.props.params.viewName}/${row.id}`}>Details</Link></td>
         </tr>
       )
     })
@@ -47,7 +46,6 @@ class View extends Component {
             <thead>
               <tr>
                 {fields}
-                <th></th>
               </tr>
             </thead>
             <tbody>
