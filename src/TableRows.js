@@ -32,7 +32,7 @@ class TableRows extends Component {
       return (
         <tr key={index}>
           {values}
-          <td><a href="#">Details</a></td>
+          <td><Link to={`/tables/${this.props.params.tableName}/${row.id}`}>Details</Link></td>
         </tr>
       )
     })
