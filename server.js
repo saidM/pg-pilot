@@ -1,13 +1,12 @@
 'use strict';
 
-const express   = require('express'),
+const express     = require('express'),
       app         = express(),
       bodyParser  = require('body-parser'),
-      Database    = require('./lib/database');
+      Database    = require('./lib/database')
 
-app.use(bodyParser.urlencoded());
-app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(bodyParser.urlencoded())
+app.use(bodyParser.json())
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -31,13 +30,11 @@ app.post('/login', (req, res, next) => {
   Promise.all([connect, getTables]).then((values) => {
     // Save the Database instance (so we can re-use it in all the routes)
     app.set('pg', database)
-
      // Render the tables
     res.json(values[1])
   }).catch((err) => {
      // Empty the PG client
     app.set('pg', null)
-
     // On to the error middleware
     next({ status: 401, message: err })
   })
