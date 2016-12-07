@@ -35,23 +35,25 @@ describe('Database Class', () => {
 
   describe('getTables()', () => {
     it('rejects the promise if the there is no connection to the database', () => {
-      let db = new Database('pokemon_test');
-      let promise = db.getTables();
+      let db = new Database('pokemon_test')
+      let promise = db.getTables()
 
-      return expect(promise).to.be.rejectedWith('There is no connection');
-    });
+      return expect(promise).to.be.rejectedWith('There is no connection')
+    })
 
     it('resolves the promise with the tables if there is an active connection', () => {
-      let db = new Database('pokemon_test');
+      const db = new Database('pokemon_test')
+      const connect = db.connect({ user: 'postgres', password: '' })
+      const getTable = db.getTables()
 
-      return expect(
-        db.connect({ user: 'postgres', password: '' })
-        .then(() => {
-          return db.getTables();
-        })
-      ).to.eventually.have.property('tables');
-    });
-  });
+      return Promise.all([connect, getTable]).then(values => {
+        let data = values[1] // Get the data from the getTables() method
+
+        expect(data).to.have.property('views')
+        expect(data).to.have.property('tables')
+      })
+    })
+  })
 
   describe('getTable()', () => {
     it('rejects the promise if the there is no connection to the database', () => {
