@@ -57,7 +57,7 @@ app.get('/tables/:name', isConnected, (req, res, next) => {
   app.get('pg').getTable(req.params.name).then((data) => {
     res.send(data)
   }).catch((err) => {
-    next({ status: 500, message: err })
+    next({ status: 404, message: err })
   })
 })
 
@@ -103,6 +103,5 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message)
 });
 
-app.listen(8080)
-
+app.listen(1234)
 module.exports = app
