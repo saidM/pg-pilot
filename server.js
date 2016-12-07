@@ -1,13 +1,12 @@
 'use strict';
 
-const express   = require('express'),
+const express     = require('express'),
       app         = express(),
       bodyParser  = require('body-parser'),
-      Database    = require('./lib/database');
+      Database    = require('./lib/database')
 
-app.use(bodyParser.urlencoded());
-app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(bodyParser.urlencoded())
+app.use(bodyParser.json())
 
 app.post('/login', (req, res, next) => {
   if (typeof req.body.user === 'undefined' || typeof req.body.database === 'undefined') next({ status: 400, message: 'Missing credentials' })
@@ -22,21 +21,14 @@ app.post('/login', (req, res, next) => {
   Promise.all([connect, getTables]).then((values) => {
     // Save the Database instance (so we can re-use it in all the routes)
     app.set('pg', database)
-
      // Render the tables
     res.json(values[1])
   }).catch((err) => {
      // Empty the PG client
     app.set('pg', null)
-
     // On to the error middleware
     next({ status: 401, message: err })
   })
-})
-
-// Returns the name of the database we are currently connected to
-app.get('/current_database', isConnected, (req, res, next) => {
-  res.send({ database: app.get('pg').database })
 })
 
 app.get('/tables', isConnected, (req, res, next) => {
