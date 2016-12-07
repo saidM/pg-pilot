@@ -6,7 +6,7 @@ class Connect extends Component {
   handleSubmit(e) {
     e.preventDefault()
 
-    const credentials = { database: this.refs.database.value, user: this.refs.user.value, password: this.refs.password.value }
+    const credentials = { host: this.refs.database.host, database: this.refs.database.value, user: this.refs.user.value, password: this.refs.password.value }
 
     axios.post('http://127.0.1:8080/login', credentials)
       .then(response => browserHistory.push('/'))
@@ -20,12 +20,16 @@ class Connect extends Component {
         <h2>Use the form below to connect to one or your PostgreSQL databases.</h2>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <p>
+            <label htmlFor="host">Host</label>
+            <input type="text" ref="host" id="host" defaultValue="localhost" />
+          </p>
+          <p>
             <label htmlFor="database">Database</label>
-            <input type="text" ref="database" id="database" />
+            <input type="text" ref="database" id="database" required />
           </p>
           <p>
             <label htmlFor="user">User</label>
-            <input type="text" ref="user" id="user" />
+            <input type="text" ref="user" id="user" required />
           </p>
           <p>
             <label htmlFor="password">Password</label>
