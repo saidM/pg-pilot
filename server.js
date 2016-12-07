@@ -36,7 +36,7 @@ app.post('/login', (req, res, next) => {
 
 // Returns the name of the database we are currently connected to
 app.get('/current_database', isConnected, (req, res, next) => {
-  res.send(app.get('pg').database)
+  res.send({ database: app.get('pg').database })
 })
 
 app.get('/tables', isConnected, (req, res, next) => {
