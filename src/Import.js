@@ -6,7 +6,7 @@ class Import extends Component {
   handleSubmit(e) {
     e.preventDefault()
 
-    axios.post('http://127.0.1:8080/import', { sql: this.refs.sql.value })
+    axios.post('/import', { sql: this.refs.sql.value })
       .then(response => {
         alert('Import succeeded. You are going to be redirected..')
         browserHistory.push('/')

@@ -9,7 +9,7 @@ class Tables extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://127.0.1:8080/tables')
+    axios.get('/tables')
       .then(response => this.setState({ tables: response.data.tables, views: response.data.views }))
       .catch(err => browserHistory.push('/connect'))
   }

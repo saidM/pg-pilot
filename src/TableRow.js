@@ -9,7 +9,7 @@ class TableRow extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://127.0.1:8080/tables/${this.props.params.tableName}/${this.props.params.id}`)
+    axios.get(`/tables/${this.props.params.tableName}/${this.props.params.id}`)
       .then(response => this.setState({ row: response.data }))
       .catch(err => alert('Row not found! Missing ID?'))
   }

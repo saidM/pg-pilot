@@ -1,19 +1,14 @@
 'use strict';
 
 const express     = require('express'),
+      path        = require('path'),
       app         = express(),
       bodyParser  = require('body-parser'),
       Database    = require('./lib/database')
 
 app.use(bodyParser.urlencoded())
 app.use(bodyParser.json())
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "DELETE")
-  next();
-});
+app.use(express.static('build'))
 
 app.post('/login', (req, res, next) => {
   if (typeof req.body.user === 'undefined' || typeof req.body.database === 'undefined') {
@@ -61,7 +56,7 @@ app.get('/tables/:name', isConnected, (req, res, next) => {
   })
 })
 
-app.get('/tables/:name/:id', isConnected, (req, res, next) => {
+app.get('/tables/:name/:id(\\d+)', isConnected, (req, res, next) => {
   app.get('pg').getRow(req.params.name, req.params.id)
     .then(data => res.send(data))
     .catch(err => next({ status: 404, message: err }))
@@ -94,6 +89,11 @@ app.post('/import', isConnected, (req, res, next) => {
   })
 })
 
+// Serve all the React routes from here
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, './build', 'index.html'))
+})
+
 function isConnected(req, res, next) {
   if (!app.get('pg')) next({ status: 401, message: 'You must be connected to the database' })
   next()
@@ -101,7 +101,7 @@ function isConnected(req, res, next) {
 
 app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message)
-});
+})
 
-app.listen(1234)
+app.listen(9000)
 module.exports = app

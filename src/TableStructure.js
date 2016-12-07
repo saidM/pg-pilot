@@ -3,13 +3,13 @@ import { Link } from 'react-router'
 import axios from 'axios'
 
 class TableStructure extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = { fields: [], indexes: [] }
   }
 
   componentDidMount() {
-    axios.get(`http://127.0.1:8080/tables/${this.props.params.tableName}`)
+    axios.get(`/tables/${this.props.params.tableName}`)
       .then(response => this.setState({ fields: response.data.fields, indexes: response.data.indexes }))
       .catch(err => console.error(err))
   }
@@ -75,7 +75,6 @@ class TableStructure extends Component {
             </tbody>
           </table>
         </div>
-
       </section>
     )
   }

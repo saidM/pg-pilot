@@ -7,9 +7,9 @@ class Header extends Component {
     super()
     this.state = { database: null }
   }
-  
+
   componentDidMount() {
-    axios.get('http://127.0.1:8080/tables')
+    axios.get('/tables')
       .then(response => this.setState({ database: response.data.database }))
       .catch(err => browserHistory.push('/connect'))
   }
@@ -17,7 +17,7 @@ class Header extends Component {
   handleLogout(e) {
     e.preventDefault()
 
-    axios.delete('http://127.0.1:8080/logout')
+    axios.delete('/logout')
       .then(response => {
         // Empty the state (database name)
         this.setState({ database: null })
@@ -34,7 +34,7 @@ class Header extends Component {
           <li>PG-Pilot</li>
           <li><Link to="/query">Perform SQL query</Link></li>
           <li><Link to="/import">Import File</Link></li>
-          <li><a href="http://localhost:8080/export">Export Database</a></li>
+          <li><a href="/export">Export Database</a></li>
           <li className="right"><strong>{this.state.database}</strong> <a href="#" onClick={this.handleLogout.bind(this)}>Switch database</a></li>
         </ul>
       </header>

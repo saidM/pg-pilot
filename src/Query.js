@@ -10,7 +10,7 @@ class Query extends Component {
   handleSubmit(e) {
     e.preventDefault()
 
-    axios.post('http://127.0.1:8080/query', { sql: this.refs.sql.value })
+    axios.post('/query', { sql: this.refs.sql.value })
       .then(response => {
         const fields = response.data.fields.map(field => field.name)
         this.setState({ fields: fields, rows: response.data.rows })

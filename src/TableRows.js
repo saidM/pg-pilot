@@ -9,7 +9,7 @@ class TableRows extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://127.0.1:8080/tables/${this.props.params.tableName}`)
+    axios.get(`/tables/${this.props.params.tableName}`)
       .then(response => this.setState({ fields: response.data.fields, rows: response.data.rows }))
       .catch(err => console.error(err))
   }

@@ -8,7 +8,7 @@ class Connect extends Component {
 
     const credentials = { host: this.refs.database.host, database: this.refs.database.value, user: this.refs.user.value, password: this.refs.password.value }
 
-    axios.post('http://127.0.1:8080/login', credentials)
+    axios.post('/login', credentials)
       .then(response => browserHistory.push('/'))
       .catch(err => alert('Invalid credentials'))
   }
