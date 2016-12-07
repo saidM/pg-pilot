@@ -103,8 +103,6 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message)
 });
 
-
-const port = process.argv[2] || 8080
-app.listen(port, () => { console.log(`PG-Pilot starting on http://localhost:${port}`) })
+app.listen(8080)
 
 module.exports = app
