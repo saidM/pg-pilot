@@ -19,7 +19,7 @@ class Header extends Component {
           <li><Link to="/query">Perform SQL query</Link></li>
           <li><Link to="/import">Import File</Link></li>
           <li><a href="http://localhost:8080/export">Export Database</a></li>
-          <li className="right"><strong>profacture_dev</strong> <a href="#" onClick={this.handleLogout}>Switch database</a></li>
+          <li className="right"><strong>{this.props.database}</strong> <a href="#" onClick={this.handleLogout}>Switch database</a></li>
         </ul>
       </header>
     )
