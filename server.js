@@ -8,11 +8,20 @@ const express     = require('express'),
 app.use(bodyParser.urlencoded())
 app.use(bodyParser.json())
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "DELETE")
+  next();
+});
+
 app.post('/login', (req, res, next) => {
-  if (typeof req.body.user === 'undefined' || typeof req.body.database === 'undefined') next({ status: 400, message: 'Missing credentials' })
+  if (typeof req.body.user === 'undefined' || typeof req.body.database === 'undefined') {
+    next({ status: 400, message: 'Missing credentials' })
+  }
 
   const credentials = req.body,
-        database    = new Database(req.body.database)
+  database          = new Database(req.body.database)
 
   const connect   = database.connect(credentials),
         getTables = database.getTables()
@@ -29,6 +38,11 @@ app.post('/login', (req, res, next) => {
     // On to the error middleware
     next({ status: 401, message: err })
   })
+})
+
+app.delete('/logout', (req, res, next) => {
+  app.set('pg', null)
+  res.json({ success: true })
 })
 
 app.get('/tables', isConnected, (req, res, next) => {
@@ -79,7 +93,6 @@ app.post('/import', isConnected, (req, res, next) => {
     next({ status: 500, message: err })
   })
 })
-
 
 function isConnected(req, res, next) {
   if (!app.get('pg')) next({ status: 401, message: 'You must be connected to the database' })
