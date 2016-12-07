@@ -8,16 +8,16 @@
   <style>
     body { margin: 0; font-family: 'Open Sans'; font-size: 13px }
 
-    div#connect { height: 100vh; margin: 0; background: #ECF0F1 }
+    div#connect { height: 100vh; margin: 0; background: #f1f3f5 }
     div#connect h1 { margin-top: 0; padding-top: 5%; text-align: center; color: #333 }
     div#connect h2 { line-height: 2; width: 30%; margin: auto; text-align: center; color: #666; font-weight: 300 }
     div#connect form { width: 35%; margin: 10% 32.5%; margin-top: 2.5%;}
     div#connect form:after { clear: both; display: block; content: ''; }
-    div#connect form p { margin-bottom: 0; padding: 0 10%; width: 80%; line-height: 3}
+    div#connect form p { margin-bottom: 2%; padding: 0 10%; width: 80%; line-height: 3}
     div#connect form p:last-of-type { margin-top: 5%; }
     div#connect form label { display: block; font-size: 13px; color: #333; letter-spacing: 0.5px; font-weight: 400}
-    div#connect form input { background: #fff; padding: 3.5% 4%; font-size: 13px; border-radius: 4px; width: 100%; border: 0; outline: 0;}
-    div#connect form input[type="submit"] { width: 40%; background: #2ABB9B; border-radius: 3px; text-transform: capitalize; font-weight: 600; cursor: pointer; border-radius: 4px; color: #fff; font-size: 14px; border: 0 }
+    div#connect form input { background: #fff; padding: 3.5% 4%; font-size: 13px; width: 100%; border: 0; outline: 0;}
+    div#connect form input[type="submit"] { width: 40%; background: #2ABB9B; text-transform: capitalize; font-weight: 400; cursor: pointer; color: #fff; font-size: 14px; border: 0 }
 
     header { background: #22313F; border-bottom: 1px solid #67809F; color: #E4F1FE; letter-spacing: 0.25px }
     header ul { margin: 0; padding: 0 }
@@ -38,14 +38,15 @@
     section { float: left; width: 79%; }
     section h1 { margin: 0; padding: 2%; font-weight: 600; border-bottom: 1px dotted #e1e3e5 }
     section h1:first-letter { text-transform: capitalize }
-    section ul#navigation { overflow: hidden; padding: 0; border: 1px solid #e1e3e5; width: 30%; margin: 2% }
+    section ul#navigation { float: left; overflow: hidden; padding: 0; border: 1px solid #e1e3e5; width: 30%; margin: 2% }
     section ul#navigation li { display: inline-block; width: 50%; text-align: center; padding: 3% 0}
     section ul#navigation li:first-child { width: 49.7%; border-right: 1px solid #f1f3f5; }
     section ul#navigation li:hover:not(.active) a { text-decoration: underline }
     section ul#navigation li.active { background: #f7f8f9; }
     section ul#navigation li.active a { cursor: default; font-weight: 600; }
     section ul#navigation li a { text-decoration: none; color: inherit; }
-    section div, section form { overflow: hidden; border: 1px solid #e1e3e5; margin: 2%; }
+    section a#go-back { margin: 2%; background: #f7f8f9; border: 1px solid #e1e3e5; color: inherit; padding: 0.8% 2%; float: right; }
+    section div, section form { clear: both; overflow: hidden; border: 1px solid #e1e3e5; margin: 2%; }
     section div h2, section form h2 { background: #f7f8f9; font-weight: 400; font-size: 14px; margin: 0; padding: 2%; }
     section form textarea { width: 96%; outline: 0; height: 20vh; padding: 2%; border: 0; border-bottom: 1px dotted #e1e3e5;margin-bottom:0; font-size: 13px}
     section form input[type="submit"] { margin: 2%; padding: 1% 2%; font-size: 13px; font-weight: 400; cursor: pointer; background: #1BA39C; color: #fff; border: 0; }

@@ -20,8 +20,8 @@ class App extends Component {
   render() {
     // Don't render the header & the "Tables" if we are on the "Connect" page
     let header, tables;
-    if (this.props.location.pathname != '/connect') header = <Header />
-    if (this.props.location.pathname != '/connect') tables = <Tables tables={this.state.tables} views={this.state.views} />
+    if (this.props.location.pathname !== '/connect') header = <Header />
+    if (this.props.location.pathname !== '/connect') tables = <Tables tables={this.state.tables} views={this.state.views} />
 
     return (
       <div id="container">

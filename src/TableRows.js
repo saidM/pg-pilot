@@ -23,9 +23,9 @@ class TableRows extends Component {
 
     const rows = this.state.rows.map((row, index) => {
       // For each row, loop through all the fields to get the value
-      const values = this.state.fields.slice(0, 5).map(field => {
+      const values = this.state.fields.slice(0, 5).map((field, index2) => {
         return (
-          <td>{row[field.column_name]}</td>
+          <td key={index2}>{row[field.column_name]}</td>
         )
       })
 

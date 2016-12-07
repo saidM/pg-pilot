@@ -20,15 +20,15 @@ class Connect extends Component {
         <h2>Use the form below to connect to one or your PostgreSQL databases.</h2>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <p>
-            <label for="database">Database</label>
+            <label htmlFor="database">Database</label>
             <input type="text" ref="database" id="database" />
           </p>
           <p>
-            <label for="user">User</label>
+            <label htmlFor="user">User</label>
             <input type="text" ref="user" id="user" />
           </p>
           <p>
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             <input type="password" ref="password" id="password" />
           </p>
           <p>
