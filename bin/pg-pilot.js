@@ -9,7 +9,7 @@ const port  = argv.port || argv.p || 8080
 
 // Start the process inside a detached process
 const start = spawn('node', ['server.js', port], {
-  detached: true,
+  detached: true
 })
 
 start.stdout.on('data', (data) => {
