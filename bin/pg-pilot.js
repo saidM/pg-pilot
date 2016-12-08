@@ -4,13 +4,21 @@
 const argv    = require('minimist')(process.argv.slice(2)),
       spawn   = require('child_process').spawn
 
+// Grab the port from the command or set a default one
 const port  = argv.port || argv.p || 8080
-const child = spawn('node', ['server.js', port], { detached: true })
 
-child.stdout.on('data', (data) => console.log('OK', data.toString()))
+// Start the process inside a detached process
+const start = spawn('node', ['server.js', port], {
+  detached: true,
+})
 
-child.stderr.on('data', (data) => {
-  console.log('error')
-  console.log('PG-Pilot starting on port 8080..')
+start.stdout.on('data', (data) => {
+  // Display the starting message from the Express server
+  console.log(data.toString())
+  // We can now safely exit the current process (child process will keep running)
   process.exit()
 })
+
+// If there is any error, display it as well
+start.stderr.on('data', (data) => console.log(data.toString()))
+start.on('error', (data) => console.log(data.toString()))
