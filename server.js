@@ -6,7 +6,7 @@ const express     = require('express'),
       bodyParser  = require('body-parser'),
       Database    = require('./lib/database')
 
-app.use(bodyParser.urlencoded())
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(express.static('build'))
 
@@ -103,5 +103,9 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message)
 })
 
-app.listen(9000)
+const port = process.argv[2] || 8080
+app.listen(port, () => {
+  process.stdout.write(`PG-Pilot starting at: http://localhost:${port}`)
+})
+
 module.exports = app

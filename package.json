@@ -8,10 +8,10 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha test",
+    "test": "mocha",
     "coverage": "istanbul cover _mocha",
     "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "start": "react-scripts start & node start server.js",
+    "back": "node server.js",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
   },
@@ -43,17 +43,17 @@
     "mocha": "^3.1.0",
     "mocha-lcov-reporter": "^1.2.0",
     "react-scripts": "0.7.0",
-    "supertest": "^2.0.0"
-  },
-  "dependencies": {
-    "axios": "^0.15.2",
-    "body-parser": "^1.15.2",
-    "express": "^4.14.0",
-    "minimist": "^1.2.0",
-    "pg": "^6.1.0",
+    "supertest": "^2.0.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-router": "^3.0.0",
-    "react-scripts": "^0.7.0"
+    "react-scripts": "^0.7.0",
+    "axios": "^0.15.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "minimist": "^1.2.0",
+    "pg": "^6.1.0"
   }
 }
