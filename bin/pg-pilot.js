@@ -9,7 +9,7 @@ const argv    = require('minimist')(process.argv.slice(2)),
 const port  = argv.port || argv.p || 8080
 
 // Start the process inside a detached process
-const start = spawn('node', [path.join(__dirname, '../server.js'), port], {
+const start = spawn('node', ['/usr/local/lib/node_modules/pg-pilot/server.js', port], {
   detached: true
 })
 
