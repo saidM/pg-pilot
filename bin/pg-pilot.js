@@ -2,13 +2,14 @@
 'use strict'
 
 const argv    = require('minimist')(process.argv.slice(2)),
+      path    = require('path'),
       spawn   = require('child_process').spawn
 
 // Grab the port from the command or set a default one
 const port  = argv.port || argv.p || 8080
 
 // Start the process inside a detached process
-const start = spawn('node', ['server.js', port], {
+const start = spawn('node', [path.join(__dirname, '../server.js'), port], {
   detached: true
 })
 
