@@ -8,8 +8,11 @@ const argv    = require('minimist')(process.argv.slice(2)),
 // Grab the port from the command or set a default one
 const port  = argv.port || argv.p || 8080
 
+// Set the current directory to where the module is stored
+process.chdir('/usr/local/lib/node_modules/pg-pilot')
+
 // Start the process inside a detached process
-const start = spawn('node', ['/usr/local/lib/node_modules/pg-pilot/server.js', port], {
+const start = spawn('node', ['server.js', port], {
   detached: true
 })
 
